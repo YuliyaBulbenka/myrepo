@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" xmlns:>
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src= "{% static 'response.js' %}"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="{% url 'Home_url' %}">GusGus</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'Home_url' %}">Главная </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/AllVideos/">Музыка</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="/about/">О группе</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="/AllVideos/">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+    </form>
+  </div>
+</nav>
+
+
+{% block Home %}{% endblock %}
+{% block AllVideos %}{% endblock %}
+{% block OneVideo %}{% endblock %}
+{% block login %}{% endblock %}
+{% block about %}{% endblock %}
+
+
+</body>
+</html>

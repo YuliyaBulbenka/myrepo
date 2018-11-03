@@ -1,5 +1,17 @@
-{% extends 'Main_templates.html' %}
+{% extends 'base.html' %}
+{% load staticfiles %}
+
 {% block AllVideos %}
+
+<nav class="navbar navbar-expand-sm bg-light">
+    <ul class="navbar-nav">
+        {% if username %}
+            <li class="nav-item"><a href="/auth/logout/">Выйти {{ username }}</a> </li>
+        {% else %}
+            <li class="nav-item"><a href="/auth/login/">Войти {{ username }}</a> </li>
+        {% endif %}
+    </ul>
+</nav>
 
     {% for con in content %}
         <iframe width="776" height="437" src={{ con.0.Video_url  }} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -16,6 +28,5 @@
     {% endfor %}
 
 {% endblock %}
-
 
 

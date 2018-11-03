@@ -5,7 +5,6 @@ from . import Form
 from django.template.context_processors import csrf    #кодировщик
 from django.contrib import auth
 
-
 def hello(request):
     return HttpResponse("Hello World")
 
@@ -13,14 +12,22 @@ def helloT(request):
     names = ["Yuliya", "Bob", "Alesha", "Valera", "Tom"]
     return render(request, "index.html", {"name": "Yuliya", "lastname": "Bulbenka", "names": names})
 
+def Home(request):
+    return render(request, "Main_templates.html")
 
 def ShowVideos(request):
     content = []
+    #search_query = request.GET.get('search', '')
+    #if search_query:
+        #content = Video.objects.filter(name__icontains=search_query)
+    #else:
+        #content = Video.objects.all()
 
     for vid in Video.objects.all():
         oneVid = [vid]
         oneVid.append(Comments.objects.filter(Comments_Video_id = vid.id))
         content.append(oneVid)
+
     return render(request, "AllVideos.html", {"content": content, "username": auth.get_user(request).username})
 
 def ShowVideo(request, video_id):
