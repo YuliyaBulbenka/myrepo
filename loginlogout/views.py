@@ -3,8 +3,6 @@ from django.contrib import auth
 from django.template.context_processors import csrf
 
 
-
-
 def login(request):
     args = {}
     args.update(csrf(request))

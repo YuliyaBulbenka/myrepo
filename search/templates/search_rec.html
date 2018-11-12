@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block search %}
+
+    <h1 class="mb-5">Музыка по запросу</h1>
+
+    {% for video_ in page_object.object_list %}
+        {% include 'hello/templates/AllVideos.html' %}
+    {% endfor %}
+
+{% endblock %}
+
+

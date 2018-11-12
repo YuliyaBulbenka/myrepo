@@ -3,6 +3,7 @@ from django.db import models
 class Video(models.Model):
     class Meta():
         db_table = "Video_table" # из доккументации
+        ordering = ['-Video_date']
 
     Video_url = models.URLField()
     Video_name = models.CharField(max_length=200)
@@ -16,6 +17,7 @@ class Video(models.Model):
 class Comments(models.Model):
     class Meta():
         db_table = "Comments_table"
+        ordering = ['-Comments_date']
 
     Comments_text = models.TextField()
     Comments_Video = models.ForeignKey(Video, on_delete=models.CASCADE)
@@ -23,6 +25,7 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.Comments_text
+
 
 
 

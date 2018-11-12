@@ -4,6 +4,8 @@ from .models import Video, Comments
 from . import Form
 from django.template.context_processors import csrf    #кодировщик
 from django.contrib import auth
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 def hello(request):
     return HttpResponse("Hello World")
@@ -16,19 +18,36 @@ def Home(request):
     return render(request, "Main_templates.html")
 
 def ShowVideos(request):
-    content = []
-    #search_query = request.GET.get('search', '')
-    #if search_query:
-        #content = Video.objects.filter(name__icontains=search_query)
-    #else:
-        #content = Video.objects.all()
+    search_query = request.GET.get('q', '')
+    if search_query:
+        Videos = Video.objects.filter(Q(Video_name__icontains=search_query) | Q(Video_properties__icontains=search_query))
+    else:
+        Videos = Video.objects.all()
 
-    for vid in Video.objects.all():
-        oneVid = [vid]
-        oneVid.append(Comments.objects.filter(Comments_Video_id = vid.id))
-        content.append(oneVid)
+    paginator = Paginator(Videos, 4)
+    page_number = request.GET.get('page', 1)
+    page = paginator.get_page(page_number)
+    is_paginated = page.has_other_pages()
+    if page.has_previous():
+        prev_url = '?page={}'.format(page.previous_page_number())
+    else:
+        prev_url = ''
 
-    return render(request, "AllVideos.html", {"content": content, "username": auth.get_user(request).username})
+    if page.has_next():
+        next_url = '?page={}'.format(page.next_page_number())
+    else:
+        next_url = ''
+
+    context = {
+        'page_object': page,
+        'is_paginated': is_paginated,
+        'prev_url': prev_url,
+        'next_url': next_url,
+        'username': auth.get_user(request).username
+    }
+
+    return render(request, 'AllVideos.html', context=context)
+
 
 def ShowVideo(request, video_id):
     comment_form = Form.CommentForm

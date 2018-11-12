@@ -1,0 +1,34 @@
+{% extends "base.html"  %}
+{% load flatpages %}
+
+
+{% block about %}
+
+<title>{{ flatpage.title }}</title>
+
+<body>
+
+  <div class="container">
+    {{ flatpage.content }}
+  </div>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="https://ru.wikipedia.org/wiki/GusGus">Немного Википедии...</a>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="https://www.instagram.com/officialgusgus/?hl=ru">www.instagram.com/officialgusgus - последние новости в Инстаграмм</a>
+      </div>
+    </div>
+  </nav>
+
+</body>
+
+
+{% endblock %}
